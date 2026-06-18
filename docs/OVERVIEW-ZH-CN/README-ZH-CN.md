@@ -288,7 +288,7 @@ USAGE_MODE=api_or_estimate
 USAGE_LOG_FILE=usage_logs.jsonl
 ```
 
-这个文件应由 Git 忽略。
+>注意:这个档案是执行时产生的本机纪录档，不应上传到 GitHub 或其他公开平台。
 
 token 使用量结果只适合用于观察与调试，不应被视为正式计费数据。
 
