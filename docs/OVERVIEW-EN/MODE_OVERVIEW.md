@@ -363,34 +363,58 @@ ai_client.py / usage_tracker.py / memory
 Discord response
 ```
 
-## Why MCP-like Mode Still Reuses Router Logic
+## Why the MCP-like Mode Still Reuses the Underlying Router Logic
 
-> Short answer: to keep the project lightweight and focused on the core concept.
+In short, both modes share the same core functional goals.
+The main difference is not what the tools do, but how the tools are organized and called.
 
-In this project, `mcp_like_mod.py` is mainly used to demonstrate the concepts of tool registration and tool calling.
+In this project, the `router` mode and the `mcp_like` mode provide mostly the same user-facing features, such as AI replies, status checks, usage statistics, privacy information, and temporary memory management.
 
-To keep the project lightweight, `mcp_like` mode does not rewrite a full set of AI, usage, and memory handling logic. Instead, it reuses the already organized functionality from router mode as much as possible.
+In other words, both modes are trying to complete the same set of tasks.
+The real difference is in the tool-handling structure:
 
-The benefits are:
+```text
+router mode:
+Uses a traditional centralized router to check the tool name and dispatch it to the matching function.
 
-* Avoiding duplicate implementation of the same features
-* Keeping the user-facing features consistent between the two modes
-* Letting `mcp_like_mod.py` focus on demonstrating the tool registry architecture
-* Keeping the project small, readable, and easy to compare
+mcp_like mode:
+Organizes tools into a registry with a name, description, parameter information, and handler function, then calls them through a unified entry point.
+```
 
-In other words, this version of `mcp_like` is more like a registration demo layer added on top of the tool layer, not a standalone MCP system that fully replaces all lower-level functionality.
+Because of this, `mcp_like_mod.py` does not reimplement a separate set of AI, usage, memory, or other feature logic.
+Instead, it reuses the already organized underlying functionality.
 
-It does not implement:
+This is not only for simplicity.
+It also keeps the comparison clearer:
+
+* both modes use the same underlying tool capabilities
+* both modes return mostly consistent user-facing results
+* the comparison can focus on routing style versus tool registration style
+* duplicated implementation is avoided
+* `mcp_like_mod.py` can focus on demonstrating the tool registration layer instead of rebuilding the whole bot
+
+In other words, this project is not trying to compare two bots with different features.
+It is trying to compare:
+
+```text
+the same tool capabilities
+organized through different tool-handling structures
+```
+
+Therefore, the `mcp_like` mode in this version is better understood as a registration demonstration layer on top of the tool system.
+It organizes tools in a structure inspired by MCP / tool-calling ideas, while still reusing the same underlying feature logic.
+
+The `mcp_like` mode in this project does not implement:
 
 * MCP client/server communication
 * MCP protocol message format
-* External tool discovery
-* Full schema validation
-* True AI-driven autonomous tool selection
+* external tool discovery
+* full schema validation
+* real AI-driven tool selection
+* AI-generated tool arguments
+* permission management or tool execution sandboxing
 
-Currently, it only demonstrates the idea of a "tool registry" in a lightweight way.
-
-That means it is closer to:
+Therefore, it is more accurately described as:
 
 ```text
 MCP-like tool registry demo
@@ -402,7 +426,7 @@ rather than:
 Full MCP implementation
 ```
 
-The reason for this design is that the main goal of this project is to stay simple, readable, and easy to demonstrate, rather than implementing a full MCP system.
+This design keeps the project small and readable while making the structural difference between a traditional router and an MCP-like tool registry easier to observe.
 
 ---
 
