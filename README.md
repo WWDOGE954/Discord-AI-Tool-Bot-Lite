@@ -1,142 +1,86 @@
-# Discord AI Bot Lite
+# Discord AI Tool Bot Lite
 
-> Note: Some documents in this project were translated with AI assistance.  
+> Note: Some documents in this project were translated with AI assistance.
 > If a translated document differs in meaning from the Traditional Chinese source document, please treat the Traditional Chinese version as the primary reference.
 
-A lightweight Discord AI bot for learning, classroom demonstration, and quick API testing.
+A lightweight Discord AI bot project focused on tool architecture experiments.
 
-This project is intentionally small. It focuses on simple AI chat, simple tools, token usage tracking, temporary memory, and two tool architecture modes: a traditional router mode and an MCP-like tool registry demo.
+This project uses a Discord bot as a small demonstration environment to compare two tool-handling approaches:
+
+* a traditional `router` mode
+* an `mcp_like` tool registry demo mode
+
+The AI chat feature is intentionally simple.
+The main purpose of this project is to show how Discord commands can be routed into internal tools, how tool logic can be separated from `main.py`, and how a lightweight MCP-like registry can be structured without implementing the full MCP protocol.
+
+This project is mainly for learning, classroom demonstration, API testing, and architecture comparison.
 
 ## Project Note
 
-This project was organized and refactored from one of my high school learning projects.
+This repository was organized and refactored from one of my high school learning projects.
 
-It is mainly kept as a learning record, classroom demonstration, and small architecture experiment.
-Because of this, the project may not be actively maintained or regularly updated.
+It was prepared as part of my personal portfolio and learning record. Since this is one of my first repositories uploaded to GitHub, there may still be issues in the repository structure, documentation, wording, or setup instructions.
 
-I have tried my best to check the code, documentation, security notes, and project structure.
-If you find any mistakes, unclear explanations, security concerns, or better implementation ideas, feel free to open an issue or start a discussion.
+Unless there is a special reason, this bot will probably not receive major updates in the future. The repository is mainly kept for documentation, learning, educational reference, and portfolio purposes.
 
+If you find any problems or have suggestions, feel free to contact me, open an issue, or use the discussion area.
 
-## Table of Contents
+## What This Project Demonstrates
 
-- [Features](#features)
-- [Project Structure](#project-structure)
-- [Documentation](#documentation)
-- [Setup](#setup)
-- [Environment Settings](#environment-settings)
-- [Commands](#commands)
-- [Architecture Modes](#architecture-modes)
-- [Token Usage](#token-usage)
-- [Privacy and Safety](#privacy-and-safety)
-- [References](#references)
-- [License](#license)
+* Discord slash command handling
+* OpenAI-compatible API integration
+* Temporary RAM-based user memory
+* Token usage tracking and rough estimation
+* Separation of Discord logic from tool logic
+* Traditional router-based tool dispatch
+* MCP-like tool registry structure
+* Basic comparison between router and MCP-like architecture
 
 ## Features
 
-- `/ai` chat command
-- `/status` bot status
-- `/usage` token usage summary
-- `/privacy` cloud API privacy notice
-- `/forget` clear temporary memory
-- Optional mention reply mode
-- OpenAI-compatible API support
-- `.env` based API, model, memory, and tool mode settings
-- Traditional router mode
-- MCP-like tool registry demo mode
-- Token usage tracking from API responses when available
-- Rough token usage estimation fallback when the API does not return usage data
-
-## Project Structure
-
-```text
-Discord-AI-BOT-Lite/
-  main.py
-  config.py
-  ai_client.py
-  usage_tracker.py
-  views.py
-  .env.example
-  requirements.txt
-  .gitignore
-  LICENSE
-  README.md
-  README-CN.md
-
-  docs/
-    TRANSLATION_NOTE.md
-    OVERVIEW-EN/
-    OVERVIEW-TW-CN/
-    OVERVIEW-ZH-CN/
-    OVERVIEW-JP/
-    OVERVIEW-KR/
-
-  mods/
-    __init__.py
-    common.py
-    tool_router_mod.py
-    mcp_like_mod.py
-```
-
-Before uploading to GitHub, make sure runtime files are removed:
-
-```text
-.env
-__pycache__/
-*.pyc
-usage_logs.jsonl
-*.log
-logs/
-data/
-```
-
-Only upload `.env.example`, not your real `.env` file.
+* `/ai` chat command
+* `/status` bot status
+* `/usage` token usage summary
+* `/privacy` cloud API privacy notice
+* `/forget` clear temporary memory
+* Optional mention reply mode
+* `.env` based API, model, memory, and tool mode settings
 
 ## Documentation
 
-Code structure and technical overview:
+See [`docs/README.md`](./docs/README.md) for documentation, command guides, architecture notes, translation notes, and supplementary multilingual documents.
 
-- [Code Overview - English](./docs/OVERVIEW-EN/CODE_OVERVIEW.md)
-- [Code Overview - Traditional Chinese](./docs/OVERVIEW-TW-CN/CODE_OVERVIEW-TW-CN.md)
-- [Code Overview - Simplified Chinese](./docs/OVERVIEW-ZH-CN/CODE_OVERVIEW-ZH-CN.md)
-- [Code Overview - Japanese](./docs/OVERVIEW-JP/CODE_OVERVIEW-JP.md)
-- [Code Overview - Korean](./docs/OVERVIEW-KR/CODE_OVERVIEW-KR.md)
+## Requirements
 
-Router and MCP-like mode explanation:
-
-- [Mode Overview - English](./docs/OVERVIEW-EN/MODE_OVERVIEW.md)
-- [Mode Overview - Traditional Chinese](./docs/OVERVIEW-TW-CN/MODE_OVERVIEW-TW-CN.md)
-- [Mode Overview - Simplified Chinese](./docs/OVERVIEW-ZH-CN/MODE_OVERVIEW-ZH-CN.md)
-- [Mode Overview - Japanese](./docs/OVERVIEW-JP/MODE_OVERVIEW-JP.md)
-- [Mode Overview - Korean](./docs/OVERVIEW-KR/MODE_OVERVIEW-KR.md)
-
-Translation note:
-
-- [Translation Note](./docs/TRANSLATION_NOTE.md)
-
-If you rename the documentation folders, remember to update these links.
-
-## Setup
+* Python 3.10+
+* Discord bot token
+* AI API key from an OpenAI-compatible API provider
+* `discord.py`
+* `python-dotenv`
+* `requests`
+* `aiohttp`
 
 Install dependencies:
 
 ```bash
-pip install -r requirements.txt
+python -m pip install -r requirements.txt
 ```
 
-Copy the environment example:
+## Configuration
 
-```bash
-copy .env.example .env
-```
-
-On macOS or Linux:
+Copy the public template:
 
 ```bash
 cp .env.example .env
 ```
 
-Fill in your Discord token and AI API settings in `.env`:
+On Windows, you can also use:
+
+```bash
+copy .env.example .env
+```
+
+Then fill in your private values:
 
 ```env
 DISCORD_TOKEN=
@@ -144,14 +88,6 @@ AI_API_BASE_URL=
 AI_API_KEY=
 AI_MODEL=
 ```
-
-Run the bot:
-
-```bash
-python main.py
-```
-
-## Environment Settings
 
 Example OpenAI-compatible API settings:
 
@@ -162,33 +98,29 @@ AI_API_KEY=
 AI_MODEL=openrouter/free
 ```
 
-Other examples:
-
-```env
-AI_API_BASE_URL=https://api.openai.com/v1
-AI_MODEL=gpt-4o-mini
-```
-
-```env
-AI_API_BASE_URL=https://api.deepseek.com/v1
-AI_MODEL=deepseek-chat
-```
-
 The project sends chat completion requests to:
 
 ```text
 <AI_API_BASE_URL>/chat/completions
 ```
 
+## Running the Bot
+
+```bash
+python main.py
+```
+
+For faster slash command sync during testing, set `GUILD_ID` in `.env` if the project supports guild-specific command sync.
+
 ## Commands
 
-| Command | Description |
-|---|---|
-| `/ai` | Send a prompt to the configured AI API |
-| `/status` | Show bot status, model, memory mode, and tool mode |
-| `/usage` | Show token usage summary |
-| `/privacy` | Show a cloud API privacy reminder |
-| `/forget` | Clear temporary memory for the current user |
+| Command    | Description                                        |
+| ---------- | -------------------------------------------------- |
+| `/ai`      | Send a prompt to the configured AI API             |
+| `/status`  | Show bot status, model, memory mode, and tool mode |
+| `/usage`   | Show token usage summary                           |
+| `/privacy` | Show a cloud API privacy reminder                  |
+| `/forget`  | Clear temporary memory for the current user        |
 
 ## Architecture Modes
 
@@ -262,7 +194,9 @@ This file should be ignored by Git.
 
 Token usage results are only for observation and debugging. They should not be treated as official billing data.
 
-## Privacy and Safety
+## AI Provider and Privacy Notice
+
+This project uses an OpenAI-compatible API style.
 
 Cloud API mode may send prompts, temporary user context, and generated replies to the configured third-party API provider.
 
@@ -274,23 +208,22 @@ However, third-party API providers may process or retain data according to their
 
 For privacy-sensitive servers, school environments, or communities involving minors, local AI deployment may be more appropriate.
 
-### Security Notice
+## Safety Notice
 
-This project requires private credentials such as a Discord bot token and an AI API key.
+Never commit the following files or data:
 
-Do not publish:
+* `.env`
+* Discord bot tokens
+* Webhook URLs
+* API keys or passwords
+* Runtime logs
+* Usage logs
+* User records
+* Private configuration files
 
-- `.env` files
-- Discord bot tokens
-- API keys
-- Webhook URLs
-- Passwords
-- Runtime logs
-- Usage logs
-- User records
-- Private configuration files
+Use `.env.example` as a safe public template. Copy it to `.env` locally and fill in your private values.
 
-If you accidentally expose a Discord token or API key, revoke or regenerate it immediately.
+If a Discord token, webhook URL, API key, or password is ever exposed, revoke or regenerate it immediately.
 
 The author is not responsible for leaked tokens, leaked API keys, unexpected API charges, account issues, data loss, privacy problems, service abuse, or misuse caused by improper setup, deployment, modification, or public upload of private files.
 
@@ -323,7 +256,6 @@ This project only implements a lightweight MCP-like tool registry demo. It is no
 * Refactoring: https://refactoring.com/
 
 Before using MCP, tool-calling, cloud APIs, or automation tools in a real project, please check the official documentation, service terms, pricing, privacy policy, data retention policy, and security requirements by yourself.
-
 
 ## License
 
