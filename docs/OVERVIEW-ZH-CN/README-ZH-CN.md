@@ -144,7 +144,7 @@ Router 与 MCP-like 模式说明：
 
 * [Translation Note](./docs/TRANSLATION_NOTE.md)
 
-如果之后修改文件夹名称，请记得同步更新 README 内的链接。
+
 
 ## 安装与启动
 
