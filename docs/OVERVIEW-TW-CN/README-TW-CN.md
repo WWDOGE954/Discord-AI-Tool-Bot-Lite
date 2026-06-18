@@ -103,7 +103,9 @@ Discord-AI-BOT-Lite/
     mcp_like_mod.py
 ```
 
-上傳到 GitHub 前，請確認已移除 runtime 檔案：
+在公開或分享本專案前，請確認 runtime 檔案與私人設定檔沒有被包含進去。
+
+.env
 
 ```text
 .env
@@ -115,7 +117,7 @@ logs/
 data/
 ```
 
-請只上傳 `.env.example`，不要上傳真正的 `.env`。
+再次申明任何情況下真正的 .env 檔案應保持私人，不應上傳到任何公開場所。
 
 ## 文件
 
@@ -283,7 +285,7 @@ USAGE_MODE=api_or_estimate
 USAGE_LOG_FILE=usage_logs.jsonl
 ```
 
-這個檔案應由 Git 忽略。
+> 注意:這個檔案是執行時產生的本機紀錄檔，不應上傳到 GitHub 或其他公開平台。
 
 token 使用量結果只適合用於觀察與除錯，不應被視為正式計費資料。
 
