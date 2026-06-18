@@ -25,6 +25,49 @@ Unless there is a special reason, this bot will probably not receive major updat
 
 If you find any problems or have suggestions, feel free to contact me, open an issue, or use the discussion area.
 
+## MCP-like Scope Clarification
+
+The `mcp_like` mode in this project is not a full MCP protocol implementation.
+
+In a real MCP-style architecture, an MCP server exposes a list of tools. Each tool usually includes a name, description, and input parameter schema.
+A host, client, or model can inspect those tool definitions and decide whether to call a tool and what arguments should be passed to it.
+
+This project does not implement that full flow.
+
+This project only demonstrates the earlier tool registration concept:
+
+* how to organize tool names
+* how to attach descriptions to tools
+* how to store simple parameter information
+* how to map tool names to handler functions
+* how to call registered tools through a unified `handle_tool()` entry point
+
+Therefore, the `mcp_like` mode in this project is more accurately described as:
+
+```text
+MCP-like tool registry demo
+```
+
+rather than:
+
+```text
+Full MCP server
+```
+
+This project does not implement:
+
+* MCP client / server communication
+* MCP protocol message format
+* tools/list or tool discovery
+* full input schema validation
+* AI-driven tool selection
+* AI-generated tool arguments
+* permission management or tool execution sandboxing
+
+In other words, this Lite version uses a Discord bot as a small example to show how tool registration could be structured in an MCP-like style.
+The focus is on understanding the difference between a traditional router and a tool registry, not on implementing the full MCP system.
+
+
 ## What This Project Demonstrates
 
 * Discord slash command handling
