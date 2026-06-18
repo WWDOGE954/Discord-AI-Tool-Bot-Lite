@@ -1,0 +1,27 @@
+# License
+
+Copyright (c) 2026 WWDOGE954
+
+This project is provided as a small educational and experimental project.
+
+You are free to use, modify, copy, distribute, and learn from this project for personal, educational, or experimental purposes.
+
+Commercial use is also allowed, but no warranty, support, maintenance, or responsibility is provided by the author.
+
+## Security and API Key Notice
+
+This project may require Discord tokens, API keys, or other private credentials to run.
+
+The author is not responsible for any leaked tokens, leaked API keys, unexpected API charges, account issues, data loss, service abuse, or security incidents caused by improper setup, deployment, modification, or public upload of private configuration files.
+
+Do not upload `.env` files, Discord tokens, API keys, passwords, webhook URLs, private logs, or other sensitive information to GitHub or any public place.
+
+If you accidentally expose a token or API key, revoke or regenerate it immediately.
+
+## Disclaimer
+
+This project is provided "as is", without warranty of any kind.
+
+The author does not guarantee that the project is secure, error-free, stable, suitable for production use, or suitable for any specific purpose.
+
+By using, modifying, or deploying this project, you are responsible for your own configuration, API usage, costs, privacy, security, and compliance with the terms of any third-party services you use.
