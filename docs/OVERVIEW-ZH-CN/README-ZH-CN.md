@@ -25,6 +25,28 @@ AI 聊天功能本身刻意保持简单。
 我已经尽力确认代码、文档、安全提醒与项目结构。
 如果你发现错误、说明不清楚、安全疑虑，或有更好的实现方式，欢迎提出 issue 或开启 discussion 讨论。
 
+## MCP-like 范围说明
+
+本项目中的 `mcp_like` 模式并不是完整 MCP protocol 实现。
+
+在真正的 MCP-style 架构中，MCP server 会向外提供工具列表，每个工具通常包含名称、描述与输入参数 schema。
+Host、client 或 model 可以根据这些工具信息，决定是否调用某个工具，以及用什么参数调用该工具。
+
+本项目没有实现完整流程。
+
+本项目只展示工具注册层：
+
+* 如何整理工具名称
+* 如何为工具加入描述
+* 如何记录简单的参数信息
+* 如何把工具名称对应到实际 handler function
+* 如何通过统一的 `handle_tool()` 入口调用已注册工具
+
+因此，本项目的 `mcp_like` 模式更准确地说是 MCP-like tool registry demo，而不是完整 MCP server。
+
+本项目没有实现 MCP client/server 通信、MCP protocol message format、tool discovery、完整 schema 验证、AI 自主选择工具，或 AI 自主生成工具参数。
+
+
 ## 目录
 
 * [功能](#功能)
