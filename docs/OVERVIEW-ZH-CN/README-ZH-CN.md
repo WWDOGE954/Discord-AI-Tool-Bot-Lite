@@ -108,7 +108,7 @@ Discord-AI-BOT-Lite/
     mcp_like_mod.py
 ```
 
-上传到 GitHub 前，请确认已移除 runtime 文件：
+这个档案是执行时产生的本机纪录档，不应上传到 GitHub 或其他公开平台。
 
 ```text
 .env
