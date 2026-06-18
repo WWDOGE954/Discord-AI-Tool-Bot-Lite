@@ -22,6 +22,26 @@ AI 聊天功能本身刻意保持簡單。
 
 本專案主要用於學習紀錄、課堂展示、API 測試與架構比較。
 
+## MCP-like 範圍說明
+
+本專案中的 `mcp_like` 模式並不是完整 MCP protocol 實作。
+
+真正的 MCP-style 架構中，MCP server 會向外提供工具清單，每個工具通常包含名稱、描述與輸入參數 schema。
+Host、client 或 model 可以根據這些工具資訊，決定是否呼叫某個工具，以及用什麼參數呼叫該工具。
+
+本專案沒有實作完整流程。
+
+本專案只展示工具註冊層：
+
+* 如何整理工具名稱
+* 如何替工具加入描述
+* 如何記錄簡單的參數資訊
+* 如何把工具名稱對應到實際 handler function
+* 如何透過統一的 `handle_tool()` 入口呼叫已註冊工具
+
+因此，本專案的 `mcp_like` 模式比較準確地說是 MCP-like tool registry demo，而不是完整 MCP server。
+
+本專案沒有實作 MCP client/server 通訊、MCP protocol message format、tool discovery、完整 schema 驗證、AI 自主選擇工具，或 AI 自主產生工具參數。
 
 ## 目錄
 
